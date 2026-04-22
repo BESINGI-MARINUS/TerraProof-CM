@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "set NODE_TEST_REPORTER=spec npx hardhat test",
+    "test:plain": "npx hardhat test"
   },
   "keywords": [],
   "author": "Besingi Marinus",
@@ -13,9 +14,12 @@
   "devDependencies": {
     "@nomicfoundation/hardhat-ignition": "^3.1.2",
     "@nomicfoundation/hardhat-toolbox-viem": "^5.0.4",
+    "@openzeppelin/contracts": "^5.6.1",
     "@types/node": "^22.19.17",
     "forge-std": "github:foundry-rs/forge-std#v1.9.4",
     "hardhat": "^3.4.0",
+    "prettier": "^3.8.3",
+    "prettier-plugin-solidity": "^2.3.1",
     "typescript": "~5.8.0",
     "viem": "^2.48.0"
   }
