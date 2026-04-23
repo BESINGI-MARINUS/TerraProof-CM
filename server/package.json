@@ -1,0 +1,28 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "TerraProof's node/express secure layer for pinata ipfs communication",
+  "license": "ISC",
+  "author": "Besingi Marinus",
+  "type": "commonjs",
+  "main": "app.ts",
+  "scripts": {
+    "dev": "nodemon --exec ts-node app.ts",
+    "start": "ts-node app.ts"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "multer": "^2.1.1",
+    "pinata": "^2.5.5"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/morgan": "^1.9.10",
+    "morgan": "^1.10.1",
+    "nodemon": "^3.1.14",
+    "ts-node": "^10.9.2"
+  }
+}
