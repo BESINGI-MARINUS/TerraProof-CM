@@ -25,6 +25,26 @@ test("registers a land parcel", async () => {
   );
 });
 
+test("stores a real-looking IPFS CID on registration", async () => {
+  const mockCID = "QmTzQ1BJFeNA4F36wJNVX1x2Sjq2DcLQGVfWGCjJfpEvgK";
+
+  await registry.write.registerLand([
+    "CMR-NW-BDA-007",
+    registrar.account.address,
+    mockCID,
+    "North West",
+  ]);
+
+  const title = await registry.read.verifyTitle(["CMR-NW-BDA-007"]);
+
+  // Verify the CID survived the round trip to the blockchain intact
+  assert.equal(title.ipfsCID, mockCID);
+
+  // Verify the IPFS gateway URL can be constructed from it
+  const gatewayUrl = `https://gateway.pinata.cloud/ipfs/${title.ipfsCID}`;
+  assert.ok(gatewayUrl.includes("Qm"), "Gateway URL looks valid");
+});
+
 test("blocks duplicate registration", async () => {
   await assert.rejects(
     registry.write.registerLand([

@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --slate-950: #0a0f1a;
+  --slate-900: #0f172a;
+  --slate-800: #1e2a3a;
+  --slate-700: #2d3f55;
+  --amber-400: #fbbf24;
+  --amber-300: #fcd34d;
+  --amber-500: #f59e0b;
+  --emerald-400: #34d399;
+  --red-400: #f87171;
+  --sky-400: #38bdf8;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background-color: var(--slate-950);
+  color: #e2e8f0;
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--slate-900); }
+::-webkit-scrollbar-thumb { background: var(--slate-700); border-radius: 3px; }
+
+/* Background grid texture */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(251,191,36,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(251,191,36,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Glowing amber border */
+.glow-border {
+  box-shadow: 0 0 0 1px rgba(251,191,36,0.2), 0 0 20px rgba(251,191,36,0.05);
+}
+
+/* Card */
+.card {
+  background: var(--slate-900);
+  border: 1px solid rgba(251,191,36,0.12);
+  border-radius: 12px;
+}
+
+.card-hover {
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.card-hover:hover {
+  border-color: rgba(251,191,36,0.35);
+  box-shadow: 0 0 24px rgba(251,191,36,0.06);
+}
+
+/* Status badges */
+.badge-pending  { background: rgba(251,191,36,0.12);  color: #fbbf24; border: 1px solid rgba(251,191,36,0.25); }
+.badge-approved { background: rgba(52,211,153,0.12);  color: #34d399; border: 1px solid rgba(52,211,153,0.25); }
+.badge-disputed { background: rgba(248,113,113,0.12); color: #f87171; border: 1px solid rgba(248,113,113,0.25); }
+.badge-rejected { background: rgba(100,116,139,0.12); color: #94a3b8; border: 1px solid rgba(100,116,139,0.25); }
+
+/* Mono text for addresses/hashes */
+.mono { font-family: 'IBM Plex Mono', monospace; }
+
+/* Display font */
+.display { font-family: 'Playfair Display', serif; }
+
+/* Amber button */
+.btn-primary {
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+  color: #0a0f1a;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: opacity 0.15s, transform 0.1s;
+}
+.btn-primary:hover  { opacity: 0.92; transform: translateY(-1px); }
+.btn-primary:active { transform: translateY(0); }
+.btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+/* Ghost button */
+.btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(251,191,36,0.25);
+  color: #fbbf24;
+  border-radius: 8px;
+  transition: background 0.15s, border-color 0.15s;
+}
+.btn-ghost:hover { background: rgba(251,191,36,0.08); border-color: rgba(251,191,36,0.5); }
+
+/* Input */
+.input-field {
+  background: var(--slate-800);
+  border: 1px solid rgba(251,191,36,0.15);
+  border-radius: 8px;
+  color: #e2e8f0;
+  font-family: 'DM Sans', sans-serif;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  width: 100%;
+  padding: 10px 14px;
+  font-size: 14px;
+}
+.input-field:focus {
+  outline: none;
+  border-color: rgba(251,191,36,0.5);
+  box-shadow: 0 0 0 3px rgba(251,191,36,0.08);
+}
+.input-field::placeholder { color: #475569; }
+
+/* Page enter animation */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.4s ease forwards; }
+
+@keyframes pulse-amber {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(251,191,36,0.3); }
+  50%       { box-shadow: 0 0 0 6px rgba(251,191,36,0); }
+}
+.pulse-amber { animation: pulse-amber 2s infinite; }
+
+/* Timeline connector */
+.timeline-line {
+  position: absolute;
+  left: 11px;
+  top: 24px;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, rgba(251,191,36,0.3), transparent);
+}

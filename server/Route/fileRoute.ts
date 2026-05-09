@@ -7,4 +7,6 @@ router
   .route("/")
   .post(fileController.uploadLandTitlePdf, fileController.uploadToIPFS);
 
+router.get("/:cid", fileController.getFileFromIPFS);
+
 export default router;

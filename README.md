@@ -55,3 +55,10 @@ After setting the variable, you can run the deployment with the Sepolia network:
 ```shell
 npx hardhat ignition deploy --network sepolia ignition/modules/Counter.ts
 ```
+
+### Essential Daily Development Commands
+
+1. npx hardhat buiild <!-- after editing .sol -->
+2. npx hardhat test <!-- run all tests -->
+3. npx hardhat node <!-- start local blockchain -->
+4. npx hardhat ignition deploy ignition/modules/TerraProof.ts <!-- deploy to local blockchain -->

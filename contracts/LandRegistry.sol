@@ -53,7 +53,6 @@ contract LandRegistry is AccessControl {
     event TitleDisputed(string parcelId, address raisedBy);
     event TitleRejected(string parcelId, address rejectedBy);
 
-    // ─── Constructor ─────────────────────────────────────────
     constructor() {
         // Deployer gets all roles so they can set up the system
         _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
