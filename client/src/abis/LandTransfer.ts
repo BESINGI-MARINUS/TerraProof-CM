@@ -1,8 +1,3 @@
-// src/abis/LandTransfer.ts
-// Copy-paste the full ABI from:
-// artifacts/contracts/LandTransfer.sol/LandTransfer.json → "abi" array
-// after running: npx hardhat build
-
 export const LAND_TRANSFER_ABI = [
   {
     inputs: [],

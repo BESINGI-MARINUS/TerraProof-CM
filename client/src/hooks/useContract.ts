@@ -85,7 +85,7 @@ export function useContract() {
       const chainId = await wc.getChainId();
 
       // Verify the contract exists at the configured address before doing anything
-      const code = await publicClient.getBytecode({
+      const code = await publicClient.getCode({
         address: CONTRACT_ADDRESS,
       });
       if (!code || code === "0x") {
