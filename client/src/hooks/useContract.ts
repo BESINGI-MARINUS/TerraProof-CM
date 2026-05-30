@@ -8,7 +8,7 @@ import {
   type WalletClient,
   type Address,
 } from "viem";
-import { sepolia } from "viem/chains";
+import { sepolia, hardhat } from "viem/chains";
 import { LAND_TRANSFER_ABI } from "../abis/LandTransfer";
 import { CONTRACT_ADDRESS, type LandTitle, TitleStatus } from "../lib/contract";
 
@@ -40,18 +40,27 @@ const INITIAL_TX: TxState = {
   success: false,
 };
 
-// ─── Clients ──────────
+// ─── Network config ───────────────────────────────────────────────────────────
+
+const IS_LOCAL = import.meta.env.VITE_NETWORK === "localhost";
+const CHAIN = IS_LOCAL ? hardhat : sepolia;
+const RPC_URL = IS_LOCAL ? "http://127.0.0.1:8545" : undefined;
+
+// ─── Clients ──────────────────────────────────────────────────────────────────
 
 function getPublicClient(): PublicClient {
-  return createPublicClient({ chain: sepolia, transport: http() });
+  return createPublicClient({
+    chain: CHAIN,
+    transport: http(RPC_URL),
+  });
 }
 
 async function getWalletClient(): Promise<WalletClient> {
   if (!window.ethereum)
     throw new Error("MetaMask not found. Please install MetaMask.");
   return createWalletClient({
-    chain: sepolia,
-    transport: custom(window.ethereum), //Tells viem to use mettamask's transport layer for signing and sending transactions
+    chain: CHAIN,
+    transport: custom(window.ethereum),
   });
 }
 
@@ -85,13 +94,13 @@ export function useContract() {
       const chainId = await wc.getChainId();
 
       // Verify the contract exists at the configured address before doing anything
-      const code = await publicClient.getCode({
+      const code = await publicClient.getBytecode({
         address: CONTRACT_ADDRESS,
       });
       if (!code || code === "0x") {
         console.error(
           `No contract found at ${CONTRACT_ADDRESS}. ` +
-            `Did you forget to deploy, or is VITE_CONTRACT_ADDRESS wrong?`,
+            `Seems like you're connected to the wrong network or forgot to deploy? `,
         );
         // Still set wallet as connected — just without roles
         setWallet({
@@ -205,7 +214,7 @@ export function useContract() {
         functionName: functionName as any,
         args: args as any,
         account: addr,
-        chain: sepolia,
+        chain: CHAIN,
       });
 
       //3. Wait for confirmation

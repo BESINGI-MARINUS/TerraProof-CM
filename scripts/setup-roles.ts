@@ -1,19 +1,21 @@
-// Run this ONCE after deploying to Sepolia to assign roles to separate wallets
-
 import { network } from "hardhat";
 
-const { viem } = await network.connect();
+// const { viem } = await network.create({
+//   network: "hardhatOp",
+//   chainType: "op",
+// });
+
+const { viem } = await network.create();
 
 // Your deployed LandTransfer address from Ignition output
 const contract = await viem.getContractAt(
   "LandTransfer",
-  "0x14dC79964da2C08b23698B3D3cc7Ca32193d9955",
+  "0x5FbDB2315678afecb367f032d93F642f64180aa3",
 );
 
-// Replace these with real separate MetaMask wallet addresses
-const SURVEYOR_ADDRESS = "0xSurveyorWalletAddressHere";
-const APPROVER_ADDRESS = "0xApproverWalletAddressHere";
-const REGISTRAR_ADDRESS = "0xRegistrarWalletAddressHere"; // can be same as deployer
+const SURVEYOR_ADDRESS = "0x70997970c51812dc3a010c7d01b50e0d17dc79c8";
+const APPROVER_ADDRESS = "0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc";
+const REGISTRAR_ADDRESS = "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266"; // can be same as deployer
 
 const SURVEYOR_ROLE = await contract.read.SURVEYOR_ROLE();
 const APPROVER_ROLE = await contract.read.APPROVER_ROLE();

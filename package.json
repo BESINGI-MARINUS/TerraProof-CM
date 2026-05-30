@@ -7,12 +7,13 @@
     "test": "set NODE_TEST_REPORTER=spec && npx hardhat test",
     "test:plain": "npx hardhat test",
     "build:contracts": "hardhat build",
-    "create:node": "npx hardhat node",
+    "local:network": "npx hardhat node",
     "copy:abis": "cp artifacts/contracts/LandRegistry.sol/LandRegistry.json client/src/abis/ && cp artifacts/contracts/LandTransfer.sol/LandTransfer.json client/src/abis/",
     "build": "npm run build:contracts && npm run copy:abis",
     "deploy:local": "npx hardhat ignition deploy ignition/modules/TerraProof.ts --network localhost",
     "deploy:serpolia": "npx hardhat ignition deploy ignition/modules/TerraProof.ts --network sepolia",
-    "set:roles:after:deploy": "npx hardhat run scripts/setup-roles.ts --network sepolia"
+    "set:roles:serpolia": "npx hardhat run scripts/setup-roles.ts --network sepolia",
+    "set:roles:local": "npx hardhat run scripts/setup-roles.ts --network localhost"
   },
   "keywords": [],
   "author": "Besingi Marinus",
