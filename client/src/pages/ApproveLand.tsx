@@ -41,7 +41,7 @@ export default function ApproveLand() {
   if (!wallet.isConnected) return <ConnectPrompt onConnect={connectWallet} />;
   if (!canApprove)
     return (
-      <RoleGuard allowed={false} roleName="Registrar, Surveyor, or Approver">
+      <RoleGuard roleName="Registrar, Surveyor, or Approver">
         <></>
       </RoleGuard>
     );
@@ -111,7 +111,7 @@ export default function ApproveLand() {
       <PageHeader
         icon="◎"
         title="Approve Title"
-        subtitle="Cast your official approval vote for a pending land parcel"
+        subtitle="Approve land parcel. Your vote is crucial in validating legitimate land claims and ensuring the integrity of our land registry. Please review the parcel details carefully before approving."
       />
 
       {/* Role chip */}
@@ -245,7 +245,7 @@ export default function ApproveLand() {
                 }}
               >
                 <span>✓</span>
-                You have already cast your approval vote for this parcel.
+                You have already given your approval vote for this parcel.
               </div>
             )}
 

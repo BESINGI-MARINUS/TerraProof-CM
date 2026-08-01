@@ -11,7 +11,7 @@ contract LandRegistry is AccessControl {
 
     uint8 public constant REQUIRED_APPROVALS = 3;
 
-    // ─── Data structures ─────────────────────────────────────
+    // Data structures
     enum TitleStatus {
         Pending,
         Approved,
@@ -35,7 +35,7 @@ contract LandRegistry is AccessControl {
     mapping(string => mapping(address => bool)) public hasApproved; // parcelId → official address → has voted?
     mapping(string => address) public pendingTransfers; // parcelId → proposed new owner (set by current owner)
 
-    // ─── Events ──────────────────────────────────────────────
+    // ─── Events
     event TitleSubmitted(string parcelId, address owner, address registrar);
     event TitleApproved(
         string parcelId,

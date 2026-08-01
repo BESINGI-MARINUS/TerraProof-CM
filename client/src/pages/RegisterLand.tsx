@@ -30,7 +30,7 @@ export default function RegisterLand() {
   if (!wallet.isConnected) return <ConnectPrompt onConnect={connectWallet} />;
   if (!wallet.roles.isRegistrar)
     return (
-      <RoleGuard allowed={false} roleName="Registrar">
+      <RoleGuard roleName="Registrar">
         <></>
       </RoleGuard>
     );
@@ -50,7 +50,7 @@ export default function RegisterLand() {
     const body = new FormData();
     body.append("document", f);
     const res = await fetch(
-      `${import.meta.env.VITE_SERVER_URL ?? "http://localhost:3001"}/api/upload`,
+      `${import.meta.env.VITE_SERVER_URL ?? "http://localhost:8000"}/api/V1/files`,
       {
         method: "POST",
         body,

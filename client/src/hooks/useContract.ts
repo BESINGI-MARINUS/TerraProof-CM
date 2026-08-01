@@ -40,14 +40,24 @@ const INITIAL_TX: TxState = {
   success: false,
 };
 
-// ─── Network config ───────────────────────────────────────────────────────────
+const INITIAL_WALLET: WalletState = {
+  address: null,
+  isConnected: false,
+  chainId: null,
+  roles: {
+    isRegistrar: false,
+    isSurveyor: false,
+    isApprover: false,
+    isAdmin: false,
+  },
+};
 
+// ─── Network config ─────────
 const IS_LOCAL = import.meta.env.VITE_NETWORK === "localhost";
 const CHAIN = IS_LOCAL ? hardhat : sepolia;
 const RPC_URL = IS_LOCAL ? "http://127.0.0.1:8545" : undefined;
 
-// ─── Clients ──────────────────────────────────────────────────────────────────
-
+// ─── Clients ───────────────
 function getPublicClient(): PublicClient {
   return createPublicClient({
     chain: CHAIN,
@@ -67,17 +77,7 @@ async function getWalletClient(): Promise<WalletClient> {
 // ─── Main hook ───
 
 export function useContract() {
-  const [wallet, setWallet] = useState<WalletState>({
-    address: null,
-    isConnected: false,
-    chainId: null,
-    roles: {
-      isRegistrar: false,
-      isSurveyor: false,
-      isApprover: false,
-      isAdmin: false,
-    },
-  });
+  const [wallet, setWallet] = useState<WalletState>(INITIAL_WALLET);
   const [tx, setTx] = useState<TxState>(INITIAL_TX);
 
   const publicClient = getPublicClient();
@@ -94,9 +94,10 @@ export function useContract() {
       const chainId = await wc.getChainId();
 
       // Verify the contract exists at the configured address before doing anything
-      const code = await publicClient.getBytecode({
+      const code = await publicClient.getCode({
         address: CONTRACT_ADDRESS,
       });
+
       if (!code || code === "0x") {
         console.error(
           `No contract found at ${CONTRACT_ADDRESS}. ` +
@@ -141,6 +142,7 @@ export function useContract() {
         }),
       ]);
 
+      // Check roles in parallel
       const [isRegistrar, isSurveyor, isApprover, isAdmin] = await Promise.all([
         publicClient.readContract({
           address: CONTRACT_ADDRESS,
@@ -197,7 +199,7 @@ export function useContract() {
     }
   }, []);
 
-  // ── Helpers ──────────────────────────────────────────────────
+  // ── Helpers ──────────
   const resetTx = () => setTx(INITIAL_TX);
 
   async function write(functionName: string, args: unknown[]) {
@@ -308,7 +310,7 @@ export function useContract() {
     [],
   );
 
-  // ── Write functions ──────────────────────────────────────────
+  // ── Write functions ───────
   const registerLand = (
     parcelId: string,
     owner: Address,
@@ -342,7 +344,7 @@ export function useContract() {
   };
 }
 
-// Extend window for MetaMask
+// Extend window for MetaMask. Without this, TypeScript would flag an error that window.ethereum doesn't exist, even though it does at runtime. This is a common pattern in dApp development.
 declare global {
   interface Window {
     ethereum?: any;

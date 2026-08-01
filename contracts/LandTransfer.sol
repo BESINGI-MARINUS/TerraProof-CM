@@ -4,8 +4,8 @@ pragma solidity ^0.8.28;
 import "./LandRegistry.sol";
 
 contract LandTransfer is LandRegistry {
-    // ─── Transfer functions ───────────────────────────────────
-    // ─── Step 1a: Owner requests a transfer ──────────────────
+    // Transfer functions
+    // Step 1a: Owner requests a transfer
     function requestTransfer(
         string memory parcelId,
         address newOwner

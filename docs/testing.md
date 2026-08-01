@@ -2,7 +2,7 @@
 
 > This document walks you through every step needed to fully test the TerraProof
 > application locally, including setting up multiple MetaMask accounts with
-> different roles, capturing screenshots for your documentation, and running
+> different roles, and running
 > every system function end-to-end.
 
 ---
@@ -34,14 +34,14 @@
 
 Before starting, confirm every item below is in place. Do not skip this section.
 
-- [ ] **Node.js v22 or higher** installed — run `node --version` to confirm
-- [ ] **MetaMask extension** installed in Chrome or Firefox
-- [ ] **Hardhat node** not yet running (you will start it in Step 2)
-- [ ] **A small PDF file** saved somewhere on your computer — this will be your
-      test "titre foncier" document. Any PDF works; name it `test-title.pdf`
-- [ ] **All three terminals** ready to open (use VS Code's split terminal feature)
-- [ ] `client/.env` file exists with both variables set (even if the contract
-      address is a placeholder — you will update it in Step 2)
+- **Node.js v22 or higher** installed — run `node --version` to confirm
+- **MetaMask extension** installed in Chrome or Firefox
+- **Hardhat node** not yet running (you will start it in Step 2)
+- **A small PDF file** saved somewhere on your computer — this will be your
+  test "titre foncier" document. Any PDF works; name it `test-title.pdf` (Though any name works just fine)
+- **All three terminals** ready to open (use VS Code's split terminal feature)
+- `client/.env` file exists with both variables set (even if the contract
+  address is a placeholder — you will update it in Step 2)
 
 ---
 
@@ -55,7 +55,7 @@ Terminal 1, 2, and 3.
 ### Terminal 1 — Start the Hardhat local blockchain
 
 ```bash
-# Run from your project root (terraproof/)
+# Run from the project root (terraproof/)
 npx hardhat node
 ```
 

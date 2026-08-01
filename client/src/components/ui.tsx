@@ -179,13 +179,13 @@ export function ConnectPrompt({ onConnect }: { onConnect: () => void }) {
   );
 }
 
-// ─── RoleGuard ────────────────────────────────────────────────────────────────
+// ─── RoleGuard ───────
 export function RoleGuard({
-  allowed,
+  allowed = false,
   roleName,
   children,
 }: {
-  allowed: boolean;
+  allowed?: boolean;
   roleName: string;
   children: React.ReactNode;
 }) {
